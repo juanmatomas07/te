@@ -7,7 +7,7 @@ pipeline{
                             steps{
                                 withCredentials([usernamePassword(credentialsId: 'github-user', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
                                     cleanWs()
-                                    sh "git clone https://${USERNAME}:${PASSWORD}@github.com/juanmatomas07/jenkins.git"
+                                    sh "git clone https://${USERNAME}:${PASSWORD}@github.com/juanmatomas07/test.git"
                                     }
                                     
                                 }
