@@ -7,19 +7,14 @@ pipeline{
                             steps{
                                 withCredentials([usernamePassword(credentialsId: 'github-user', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
                                     cleanWs()
-                                    sh "git clone https://${USERNAME}:${PASSWORD}@github.com/juanmatomas07/test.git"
+                                   sh '''git clone https://${USERNAME}:${PASSWORD}@github.com/juanmatomas07/test.git \
+                            && docker build -t app . \
+                            && docker run -p 8081:8080 app'''
                                     }
                                     
                                 }
                      }
                    
-                stage("Build-app") {
-                    steps {         
-                        withCredentials([usernamePassword(credentialsId: 'github-user', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
-                           sh '''docker build -t tomcast . \
-                           && docker run -p 8081:8080 tomcast_cluster'''                                     
-                            }
-                      }
-                }
+                
             }
          }
